@@ -21,39 +21,39 @@ namespace DoAnMonHoc
             {
                 // -------------XỦ LÝ LOẠI HÀNG-------------------
                 // Tạo loại hàng
-                var test = XL_LoaiHang.ConsoleTaoLoaiHang();
-                XL_CuaHang.ConsoleThemLoaiHang(test, ref cuaHang);
+                // var test = XL_LoaiHang.ConsoleTaoLoaiHang();
+                // XL_CuaHang.ConsoleThemLoaiHang(test, ref cuaHang);
 
                 // Tìm kiếm loại hàng by ID
-                Console.Write("Nhập Id cần tìm: ");
-                string findId = Console.ReadLine();
-                XL_CuaHang.ConsoleGetLoaiHangById(findId, cuaHang);
+                // Console.Write("Nhập Id cần tìm: ");
+                // string findId = Console.ReadLine();
+                // XL_CuaHang.ConsoleGetLoaiHangById(findId, cuaHang);
                 
                 // Update loại hàng ID
-                Console.Write("Nhập ID cần cập nhật: ");
-                string oldId = Console.ReadLine();
-                Console.Write("Nhập ID thay thế: ");
-                string newId = Console.ReadLine();
-                XL_CuaHang.ConsoleUpdateLoaiHangId(ref cuaHang, oldId, newId);
+                // Console.Write("Nhập ID cần cập nhật: ");
+                // string oldId = Console.ReadLine();
+                // Console.Write("Nhập ID thay thế: ");
+                // string newId = Console.ReadLine();
+                // XL_CuaHang.ConsoleUpdateLoaiHangId(ref cuaHang, oldId, newId);
                 
                 // Update loại hàng tên
-                Console.Write("Nhập Id cần cập nhật: ");
-                string id = Console.ReadLine();
-                Console.Write("Nhập tên thay thế: ");
-                string newName = Console.ReadLine();
-                XL_CuaHang.ConsoleUpdateLoaiHangTen(ref cuaHang, id, newName);
+                // Console.Write("Nhập Id cần cập nhật: ");
+                // string id = Console.ReadLine();
+                // Console.Write("Nhập tên thay thế: ");
+                // string newName = Console.ReadLine();
+                // XL_CuaHang.ConsoleUpdateLoaiHangTen(ref cuaHang, id, newName);
                 
-                // Delete loại hàng by ID
-                Console.Write("Nhập ID cần xóa: ");
-                id = Console.ReadLine();
-                XL_CuaHang.ConsoleDeleteLoaiHangById(ref cuaHang, id);
+                // // Delete loại hàng by ID
+                // Console.Write("Nhập ID cần xóa: ");
+                // id = Console.ReadLine();
+                // XL_CuaHang.ConsoleDeleteLoaiHangById(ref cuaHang, id);
                 
                 // Tìm kiếm loại hàng
-                Console.Write("Nhập tên cần tìm: ");
-                string toFind = Console.ReadLine();
-                XL_CuaHang.ConsoleTimKiemLoaiHang(cuaHang, "regex", toFind);
-                
-                XL_CuaHang.ShowAllLoaiHang(cuaHang);
+                // Console.Write("Nhập tên cần tìm: ");
+                // string toFind = Console.ReadLine();
+                // XL_CuaHang.ConsoleTimKiemLoaiHang(cuaHang, "regex", toFind);
+                //
+                // XL_CuaHang.ShowAllLoaiHang(cuaHang);
                 
                 // --------------XỬ LÝ MẶT HÀNG-----------------
                 
@@ -62,16 +62,16 @@ namespace DoAnMonHoc
                 XL_CuaHang.ConsoleThemMatHang(ref cuaHang, testMatHang);
                 
                 // Tìm kiếm mặt hàng by ID
-                Console.Write("Nhập Id cần tìm: ");
-                findId = Console.ReadLine();
-                XL_CuaHang.ConsoleGetLoaiHangById(findId, cuaHang);
+                // Console.Write("Nhập Id cần tìm: ");
+                // findId = Console.ReadLine();
+                // XL_CuaHang.ConsoleGetLoaiHangById(findId, cuaHang);
                 
                 // Update mặt hàng ID
-                Console.Write("Nhập ID cần cập nhật: ");
-                oldId = Console.ReadLine();
-                Console.Write("Nhập ID thay thế: ");
-                newId = Console.ReadLine();
-                XL_CuaHang.ConsoleUpdateMatHangId(ref cuaHang, oldId, newId);
+                // Console.Write("Nhập ID cần cập nhật: ");
+                // oldId = Console.ReadLine();
+                // Console.Write("Nhập ID thay thế: ");
+                // newId = Console.ReadLine();
+                // XL_CuaHang.ConsoleUpdateMatHangId(ref cuaHang, oldId, newId);
             }
         }
     }
