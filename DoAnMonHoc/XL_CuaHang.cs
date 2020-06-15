@@ -47,18 +47,17 @@ namespace DoAnMonHoc
         // Hàm xử lý logic
         public static bool ThemLoaiHang(LOAI_HANG newItem, ref CUA_HANG cuaHang)
         {
+            bool isSuccess = false;
             var foundItemList = cuaHang.TatCaLoaiHang.Where(st => st.Ma == newItem.Ma).ToList();
             if (!foundItemList.Any())
             {
                 cuaHang.TatCaLoaiHang.Add(newItem);
-                return true;
+                isSuccess = true;
             }
-            else
-            {
-                return false;
-            }
+
+            return isSuccess;
         }
-        public static LOAI_HANG? GetLoaiHangByID(string id, CUA_HANG cuaHang)
+        public static LOAI_HANG? GetLoaiHangById(string id, CUA_HANG cuaHang)
         {
             var foundItemList = cuaHang.TatCaLoaiHang.Where(st => st.Ma == id).ToList();
             if (!foundItemList.Any())
@@ -75,8 +74,8 @@ namespace DoAnMonHoc
         {
             bool isSuccess = false;
             
-            var foundItemOldId = GetLoaiHangByID(oldId, cuaHang);
-            var foundItemNewId = GetLoaiHangByID(newId, cuaHang);
+            var foundItemOldId = GetLoaiHangById(oldId, cuaHang);
+            var foundItemNewId = GetLoaiHangById(newId, cuaHang);
             
             if (foundItemOldId != null && foundItemNewId == null)
             {
@@ -87,12 +86,10 @@ namespace DoAnMonHoc
                 {
                     LOAI_HANG oldLoaiHang = cuaHang.TatCaLoaiHang[index];
                     cuaHang.TatCaLoaiHang[index] = new LOAI_HANG(newId, oldLoaiHang.TenLoaiHang);
+                    
+                    // TODO: Và update tất cả mặt hàng với oldId
+                    isSuccess = true;
                 }
-                
-                // TODO: Và update tất cả mặt hàng với oldId
-
-                isSuccess = true;
-
             }
 
             return isSuccess;
@@ -102,24 +99,29 @@ namespace DoAnMonHoc
         {
             bool isSuccess = false;
 
-            var foundItem = GetLoaiHangByID(id, cuaHang);
+            var foundItem = GetLoaiHangById(id, cuaHang);
 
             if (foundItem != null)
             {
                 int index = cuaHang.TatCaLoaiHang.FindLastIndex(c => c.Ma == id);
-                cuaHang.TatCaLoaiHang[index] = new LOAI_HANG(id, newName);
+
+                if (index != -1)
+                {
+                    cuaHang.TatCaLoaiHang[index] = new LOAI_HANG(id, newName);
+                    isSuccess = true;
+                }
             }
 
             return isSuccess;
         }
         
-        public static bool DeleteLoaiHangByID(ref CUA_HANG cuaHang, string id)
+        public static bool DeleteLoaiHangById(ref CUA_HANG cuaHang, string id)
         {
             // Chỉ delete khi tôn tại loại hàng với id đó
             // Và không có mặt hàng nào có loại hàng như thế
             bool isSuccess = false;
             
-            var foundItem = GetLoaiHangByID(id, cuaHang);
+            var foundItem = GetLoaiHangById(id, cuaHang);
             
             // TODO: Check nếu có bất kì mặt hàng nào thuộc loại hàng với ID = id
             
@@ -127,6 +129,7 @@ namespace DoAnMonHoc
             {
                 int index = cuaHang.TatCaLoaiHang.FindLastIndex(c => c.Ma == id);
                 cuaHang.TatCaLoaiHang.RemoveAt(index);
+                isSuccess = true;
             }
 
             return isSuccess;
@@ -138,7 +141,7 @@ namespace DoAnMonHoc
             
             if (options == "id")
             {
-                LOAI_HANG? foundItem = GetLoaiHangByID(toFindObject, cuaHang);
+                LOAI_HANG? foundItem = GetLoaiHangById(toFindObject, cuaHang);
 
                 if (foundItem != null)
                 {
@@ -190,7 +193,7 @@ namespace DoAnMonHoc
         {
             Console.WriteLine();
             Console.WriteLine($"Tìm kiếm trong cơ sở dữ liệu loại hàng với id: {id}");
-            var foundItem = GetLoaiHangByID(id, cuaHang);
+            var foundItem = GetLoaiHangById(id, cuaHang);
 
             if (foundItem != null)
             {
@@ -231,7 +234,7 @@ namespace DoAnMonHoc
 
         public static void ConsoleDeleteLoaiHangById(ref CUA_HANG cuaHang, string id)
         {
-            bool deleteSuccess = DeleteLoaiHangByID(ref cuaHang, id);
+            bool deleteSuccess = DeleteLoaiHangById(ref cuaHang, id);
 
             if (deleteSuccess)
             {
@@ -260,5 +263,211 @@ namespace DoAnMonHoc
             }
         }
         
+        // Apply CRUD mặt hàng
+        
+        // Hàm xử lý logic
+        public static bool ThemMatHang(ref CUA_HANG cuaHang, MAT_HANG newItem)
+        {
+            bool isSuccess = false;
+            
+            // Unique ID
+            var foundItemList = cuaHang.TatCaMatHang.Where(c => c.Ma == newItem.Ma).ToList();
+            
+            // Loại hàng phải tồn tại
+            var foundLoaiHang = cuaHang.TatCaLoaiHang.Where(c => c.Ma == newItem.LoaiHang).ToList();
+
+            if (!foundItemList.Any() && foundLoaiHang.Any())
+            {
+                cuaHang.TatCaMatHang.Add(newItem);
+                isSuccess = true;
+            }
+
+            return isSuccess;
+        }
+
+        public static MAT_HANG? GetMatHangById(CUA_HANG cuaHang, string id)
+        {
+            var foundItemList = cuaHang.TatCaMatHang.Where(c => c.Ma == id).ToList();
+            if (!foundItemList.Any())
+            {
+                return null;
+            }
+            else
+            {
+                return foundItemList[0];
+            }
+        }
+
+        public static bool UpdateMatHangId(ref CUA_HANG cuaHang, string oldId, string newId)
+        {
+            bool isSuccess = false;
+
+            var foundItemOldId = GetMatHangById(cuaHang, oldId);
+            var foundItemNewId = GetMatHangById(cuaHang, newId);
+
+            if (foundItemOldId != null && foundItemNewId == null)
+            {
+                int index = cuaHang.TatCaMatHang.FindLastIndex(c => c.Ma == oldId);
+
+                if (index != -1)
+                {
+                    MAT_HANG oldMatHang = cuaHang.TatCaMatHang[index];
+                    cuaHang.TatCaMatHang[index] = new MAT_HANG(newId, oldMatHang.TenHang, oldMatHang.HanDung, oldMatHang.CongTySanXuat, oldMatHang.NamSanXuat, oldMatHang.LoaiHang);
+                }
+
+                isSuccess = true;
+            }
+
+            return isSuccess;
+        }
+
+        public static bool UpdateMatHangTen(ref CUA_HANG cuaHang, string id, string newName)
+        {
+            bool isSuccess = false;
+
+            var foundItem = GetMatHangById(cuaHang, id);
+
+            if (foundItem != null)
+            {
+                int index = cuaHang.TatCaMatHang.FindLastIndex(c => c.Ma == id);
+
+                if (index != -1)
+                {
+                    MAT_HANG oldMatHang = cuaHang.TatCaMatHang[index];
+                    cuaHang.TatCaMatHang[index] = new MAT_HANG(id, newName, oldMatHang.HanDung, oldMatHang.CongTySanXuat, oldMatHang.NamSanXuat, oldMatHang.LoaiHang);
+                    isSuccess = true;
+                }
+            }
+
+            return isSuccess;
+        }
+
+        public static bool UpdateMatHangHanDung(ref CUA_HANG cuaHang, string id, DateTime newDate)
+        {
+            bool isSuccess = false;
+
+            var foundItem = GetMatHangById(cuaHang, id);
+
+            if (foundItem != null)
+            {
+                int index = cuaHang.TatCaMatHang.FindLastIndex(c => c.Ma == id);
+
+                if (index != -1)
+                {
+                    MAT_HANG oldMatHang = cuaHang.TatCaMatHang[index];
+                    cuaHang.TatCaMatHang[index] = new MAT_HANG(id, oldMatHang.TenHang, newDate, oldMatHang.CongTySanXuat, oldMatHang.NamSanXuat, oldMatHang.LoaiHang);
+                    isSuccess = true;
+                }
+            }
+
+            return isSuccess;
+        }
+        
+        public static bool UpdateMatHangCongTySx(ref CUA_HANG cuaHang, string id, string newCty)
+        {
+            bool isSuccess = false;
+
+            var foundItem = GetMatHangById(cuaHang, id);
+
+            if (foundItem != null)
+            {
+                int index = cuaHang.TatCaMatHang.FindLastIndex(c => c.Ma == id);
+
+                if (index != -1)
+                {
+                    MAT_HANG oldMatHang = cuaHang.TatCaMatHang[index];
+                    cuaHang.TatCaMatHang[index] = new MAT_HANG(id, oldMatHang.TenHang, oldMatHang.HanDung, newCty, oldMatHang.NamSanXuat, oldMatHang.LoaiHang);
+                    isSuccess = true;
+                }
+            }
+
+            return isSuccess;
+        }
+        
+        public static bool UpdateMatHangNamSx(ref CUA_HANG cuaHang, string id, int newYear)
+        {
+            bool isSuccess = false;
+
+            var foundItem = GetMatHangById(cuaHang, id);
+
+            if (foundItem != null)
+            {
+                int index = cuaHang.TatCaMatHang.FindLastIndex(c => c.Ma == id);
+
+                if (index != -1)
+                {
+                    MAT_HANG oldMatHang = cuaHang.TatCaMatHang[index];
+                    cuaHang.TatCaMatHang[index] = new MAT_HANG(id, oldMatHang.TenHang, oldMatHang.HanDung, oldMatHang.CongTySanXuat, newYear, oldMatHang.LoaiHang);
+                    isSuccess = true;
+                }
+            }
+
+            return isSuccess;
+        }
+        
+        public static bool UpdateMatHangLoaiHang(ref CUA_HANG cuaHang, string id, string maLoaiHang)
+        {
+            bool isSuccess = false;
+
+            var foundMatHang = GetMatHangById(cuaHang, id);
+            var foundLoaiHang = GetLoaiHangById(maLoaiHang, cuaHang);
+            
+
+            if (foundMatHang != null && foundLoaiHang != null)
+            {
+                int index = cuaHang.TatCaMatHang.FindLastIndex(c => c.Ma == id);
+
+                if (index != -1)
+                {
+                    MAT_HANG oldMatHang = cuaHang.TatCaMatHang[index];
+                    cuaHang.TatCaMatHang[index] = new MAT_HANG(id, oldMatHang.TenHang, oldMatHang.HanDung, oldMatHang.CongTySanXuat, oldMatHang.NamSanXuat, maLoaiHang);
+                    isSuccess = true;
+                }
+            }
+
+            return isSuccess;
+        }
+
+        public static bool DeleteMatHangById(ref CUA_HANG cuaHang, string id)
+        {
+            bool isSuccess = false;
+
+            var foundMatHang = GetMatHangById(cuaHang, id);
+            if (foundMatHang != null)
+            {
+                int index = cuaHang.TatCaMatHang.FindLastIndex(c => c.Ma == id);
+                cuaHang.TatCaMatHang.RemoveAt(index);
+                isSuccess = true;
+            }
+
+            return isSuccess;
+        }
+
+        public static List<MAT_HANG> TimKiemMatHang(CUA_HANG cuaHang, string options, string toFindObject)
+        {
+            List<MAT_HANG> result = new List<MAT_HANG>();
+
+            if (options == "id")
+            {
+                MAT_HANG? foundItem = GetMatHangById(cuaHang, toFindObject);
+
+                if (foundItem != null)
+                {
+                    result.Add((MAT_HANG)foundItem);
+                }
+            }
+            else if (options == "regex")
+            {
+                var foundItemList = cuaHang.TatCaMatHang
+                    .Where(c => c.TenHang.Contains(toFindObject, StringComparison.CurrentCultureIgnoreCase)).ToList();
+
+                foreach (var matHang in foundItemList)
+                {
+                    result.Add(matHang);
+                }
+            }
+
+            return result;
+        }
     }
 }

@@ -13,6 +13,17 @@ namespace DoAnMonHoc
         public string CongTySanXuat;
         public int NamSanXuat;
         public string LoaiHang;
+
+        public MAT_HANG(string maMatHang, string tenMatHang, DateTime hanDung, string congTySanXuat, int namSanXuat,
+            string loaiHang)
+        {
+            Ma = maMatHang;
+            TenHang = tenMatHang;
+            HanDung = hanDung;
+            CongTySanXuat = congTySanXuat;
+            NamSanXuat = namSanXuat;
+            LoaiHang = loaiHang;
+        }
     }
     public class XL_MatHang
     {
