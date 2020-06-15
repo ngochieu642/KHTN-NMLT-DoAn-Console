@@ -60,10 +60,18 @@ namespace DoAnMonHoc
                 Console.WriteLine("Loại hàng với ID này đã tồn tại");
                 Console.WriteLine("Loại hàng không được thêm vào cơ sở dữ liệu");
             }
-        }
-        public static void GetAllLoaiHang()
-        {
             
+            ShowAllLoaiHang(cuaHang);
+        }
+        public static void ShowAllLoaiHang(CUA_HANG cuaHang)
+        {
+            Console.WriteLine();
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("Các loại hàng tồn tại trong cửa hàng");
+            foreach (var loaiHang in cuaHang.TatCaLoaiHang)
+            {
+                XL_LoaiHangItem.XuatLoaiHang(loaiHang);
+            }
         }
 
         public static void GetLoaiHangByID(string id)

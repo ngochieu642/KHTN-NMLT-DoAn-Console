@@ -36,8 +36,7 @@ namespace DoAnMonHoc
         {
             Console.WriteLine();
             Console.WriteLine($"Mã loại hàng: {a.Ma}");
-            Console.WriteLine($"Tên loại hàng:{a.TenLoaiHang}");
-            Console.WriteLine();
+            Console.WriteLine($"Tên loại hàng: {a.TenLoaiHang}");
         }
     }
 }
