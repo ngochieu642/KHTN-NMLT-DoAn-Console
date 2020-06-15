@@ -138,6 +138,21 @@ namespace DoAnMonHoc
 
             return isSuccess;
         }
+
+        public static bool UpdateLoaiHangTen(ref CUA_HANG cuaHang, string id, string newName)
+        {
+            bool isSuccess = false;
+
+            var foundItem = GetLoaiHangByID(id, cuaHang);
+
+            if (foundItem != null)
+            {
+                int index = cuaHang.TatCaLoaiHang.FindLastIndex(c => c.Ma == id);
+                cuaHang.TatCaLoaiHang[index] = new LOAI_HANG(id, newName);
+            }
+
+            return isSuccess;
+        }
         public static void ConsoleUpdateLoaiHangId(ref CUA_HANG cuaHang, string oldId, string newId)
         {
             bool updateSuccess = UpdateLoaiHangId(ref cuaHang, oldId, newId);
@@ -151,6 +166,19 @@ namespace DoAnMonHoc
             }
         }
 
+        public static void ConsoleUpdateLoaiHangTen(ref CUA_HANG cuaHang, string id, string newName)
+        {
+            bool updateSuccess = UpdateLoaiHangTen(ref cuaHang, id, newName);
+
+            if (updateSuccess)
+            {
+                Console.WriteLine($"Cập nhật tên cho loại hàng với ID: {id}");
+            }
+            else
+            {
+                Console.WriteLine("Không thể Update vì ID không hợp lệ");
+            }
+        }
         public static void DeleteLoaiHangByID(ref CUA_HANG cuaHang, string id)
         {
             // Chỉ delete khi tôn tại loại hàng với id đó
