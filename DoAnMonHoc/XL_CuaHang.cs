@@ -43,6 +43,8 @@ namespace DoAnMonHoc
         }
         
         // Apply CRUD Loai hàng
+        
+        // Hàm xử lý logic
         public static bool ThemLoaiHang(LOAI_HANG newItem, ref CUA_HANG cuaHang)
         {
             var foundItemList = cuaHang.TatCaLoaiHang.Where(st => st.Ma == newItem.Ma).ToList();
@@ -56,33 +58,6 @@ namespace DoAnMonHoc
                 return false;
             }
         }
-        public static void ConsoleThemLoaiHang(LOAI_HANG newItem, ref CUA_HANG cuaHang)
-        {
-            // Check nếu loại hàng với id đã tồn tại
-            bool themThanhCong = ThemLoaiHang(newItem, ref cuaHang);
-
-            if (themThanhCong)
-            {
-                Console.WriteLine("Loại hàng với ID phù hợp");
-                Console.WriteLine("Loại hàng thêm vào cơ sở dữ liệu thành công");
-            }
-            else
-            {
-                Console.WriteLine("Loại hàng với ID này đã tồn tại");
-                Console.WriteLine("Loại hàng không được thêm vào cơ sở dữ liệu");
-            }
-        }
-        public static void ShowAllLoaiHang(CUA_HANG cuaHang)
-        {
-            Console.WriteLine();
-            Console.WriteLine("------------------------------");
-            Console.WriteLine("Các loại hàng tồn tại trong cửa hàng");
-            foreach (var loaiHang in cuaHang.TatCaLoaiHang)
-            {
-                XL_LoaiHangItem.XuatLoaiHang(loaiHang);
-            }
-        }
-
         public static LOAI_HANG? GetLoaiHangByID(string id, CUA_HANG cuaHang)
         {
             var foundItemList = cuaHang.TatCaLoaiHang.Where(st => st.Ma == id).ToList();
@@ -93,22 +68,6 @@ namespace DoAnMonHoc
             else
             {
                 return foundItemList[0];
-            }
-        }
-
-        public static void ConsoleGetLoaiHangById(string id, CUA_HANG cuaHang)
-        {
-            Console.WriteLine();
-            Console.WriteLine($"Tìm kiếm trong cơ sở dữ liệu loại hàng với id: {id}");
-            var foundItem = GetLoaiHangByID(id, cuaHang);
-
-            if (foundItem != null)
-            {
-                XL_LoaiHangItem.XuatLoaiHang((LOAI_HANG)foundItem);
-            }
-            else
-            {
-                Console.WriteLine($"Không tồn tại loại hàng với id: {id}");
             }
         }
 
@@ -172,6 +131,77 @@ namespace DoAnMonHoc
 
             return isSuccess;
         }
+        
+        public static List <LOAI_HANG> TimKiemLoaiHang(CUA_HANG cuaHang, string options, string toFindObject)
+        {
+            List<LOAI_HANG> result = new List<LOAI_HANG>();
+            
+            if (options == "id")
+            {
+                LOAI_HANG? foundItem = GetLoaiHangByID(toFindObject, cuaHang);
+
+                if (foundItem != null)
+                {
+                    result.Add((LOAI_HANG) foundItem);   
+                }
+            }
+            else if (options == "regex")
+            {
+                var foundItemList = cuaHang.TatCaLoaiHang.Where(st => st.TenLoaiHang.Contains(toFindObject, StringComparison.CurrentCultureIgnoreCase)).ToList();
+                foreach (var item in foundItemList)
+                {
+                    result.Add(item);
+                }
+            }
+
+            return result;
+        }
+        
+        // Hàm log console
+        public static void ShowAllLoaiHang(CUA_HANG cuaHang)
+        {
+            Console.WriteLine();
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("Các loại hàng tồn tại trong cửa hàng");
+            foreach (var loaiHang in cuaHang.TatCaLoaiHang)
+            {
+                XL_LoaiHang.XuatLoaiHang(loaiHang);
+            }
+        }
+
+        public static void ConsoleThemLoaiHang(LOAI_HANG newItem, ref CUA_HANG cuaHang)
+        {
+            // Check nếu loại hàng với id đã tồn tại
+            bool themThanhCong = ThemLoaiHang(newItem, ref cuaHang);
+
+            if (themThanhCong)
+            {
+                Console.WriteLine("Loại hàng với ID phù hợp");
+                Console.WriteLine("Loại hàng thêm vào cơ sở dữ liệu thành công");
+            }
+            else
+            {
+                Console.WriteLine("Loại hàng với ID này đã tồn tại");
+                Console.WriteLine("Loại hàng không được thêm vào cơ sở dữ liệu");
+            }
+        }
+
+        public static void ConsoleGetLoaiHangById(string id, CUA_HANG cuaHang)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"Tìm kiếm trong cơ sở dữ liệu loại hàng với id: {id}");
+            var foundItem = GetLoaiHangByID(id, cuaHang);
+
+            if (foundItem != null)
+            {
+                XL_LoaiHang.XuatLoaiHang((LOAI_HANG)foundItem);
+            }
+            else
+            {
+                Console.WriteLine($"Không tồn tại loại hàng với id: {id}");
+            }
+        }
+
         public static void ConsoleUpdateLoaiHangId(ref CUA_HANG cuaHang, string oldId, string newId)
         {
             bool updateSuccess = UpdateLoaiHangId(ref cuaHang, oldId, newId);
@@ -212,29 +242,23 @@ namespace DoAnMonHoc
                 Console.WriteLine($"Mặt hàng với ID: {id} không thể xóa khỏi cơ sở dữ liêụ");
             }
         }
-        public static List <LOAI_HANG> TimKiemLoaiHang(CUA_HANG cuaHang, string options, string toFindObject)
+
+        public static void ConsoleTimKiemLoaiHang(CUA_HANG cuaHang, string options, string toFindObject)
         {
-            List<LOAI_HANG> result = new List<LOAI_HANG>();
-            
-            if (options == "id")
-            {
-                LOAI_HANG? foundItem = GetLoaiHangByID(toFindObject, cuaHang);
+            List<LOAI_HANG> foundItems = TimKiemLoaiHang(cuaHang, options, toFindObject);
 
-                if (foundItem != null)
-                {
-                    result.Add((LOAI_HANG) foundItem);   
-                }
-            }
-            else if (options == "regex")
+            if (foundItems.Any())
             {
-                var foundItemList = cuaHang.TatCaLoaiHang.Where(st => st.TenLoaiHang.Contains(toFindObject, StringComparison.CurrentCultureIgnoreCase)).ToList();
-                foreach (var item in foundItemList)
-                {
-                    result.Add(item);
-                }
+                Console.WriteLine();
+                Console.WriteLine("Kết quả tìm kiếm: ");
+                XL_LoaiHang.XuatLoaiHangList(foundItems);
             }
-
-            return result;
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine("Không có loại hàng thỏa điều kiện tìm kiếm");
+            }
         }
+        
     }
 }

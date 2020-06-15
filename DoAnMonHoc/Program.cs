@@ -21,7 +21,7 @@ namespace DoAnMonHoc
             while (true)
             {
                 // Tạo loại hàng
-                var test = XL_LoaiHangItem.ConsoleTaoLoaiHang();
+                var test = XL_LoaiHang.ConsoleTaoLoaiHang();
                 
                 // Tạo loại hàng
                 XL_CuaHang.ConsoleThemLoaiHang(test, ref cuaHang);
@@ -49,6 +49,11 @@ namespace DoAnMonHoc
                 // Console.Write("Nhập ID cần xóa: ");
                 // string id = Console.ReadLine();
                 // XL_CuaHang.ConsoleDeleteLoaiHangById(ref cuaHang, id);
+                
+                // Tìm kiếm loại hàng
+                // Console.Write("Nhập tên cần tìm: ");
+                // string toFind = Console.ReadLine();
+                // XL_CuaHang.ConsoleTimKiemLoaiHang(cuaHang, "regex", toFind);
                 
                 XL_CuaHang.ShowAllLoaiHang(cuaHang);
             }

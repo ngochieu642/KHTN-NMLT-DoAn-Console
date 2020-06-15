@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace DoAnMonHoc
 {
@@ -14,7 +15,7 @@ namespace DoAnMonHoc
         }
     }
     
-    public class XL_LoaiHangItem
+    public class XL_LoaiHang
     {
         public static LOAI_HANG TaoLoaiHang(string ma, string tenLoaiHang)
         {
@@ -43,6 +44,14 @@ namespace DoAnMonHoc
             Console.WriteLine();
             Console.WriteLine($"Mã loại hàng: {a.Ma}");
             Console.WriteLine($"Tên loại hàng: {a.TenLoaiHang}");
+        }
+
+        public static void XuatLoaiHangList(List<LOAI_HANG> a)
+        {
+            foreach (var loaiHang in a)
+            {
+                XL_LoaiHang.XuatLoaiHang(loaiHang);
+            }
         }
     }
 }
