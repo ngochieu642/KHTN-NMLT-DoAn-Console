@@ -15,94 +15,87 @@ namespace DoAnMonHoc
     }
     public class XL_MatHangItem
     {
-        public static MAT_HANG TaoMatHang()
+        public static MAT_HANG TaoMatHang(string maMatHang, string tenMatHang, DateTime hanDung, string congTySanXuat,
+            int namSanXuat, string maLoaiHang)
         {
             MAT_HANG result = new MAT_HANG();
-            Console.WriteLine("Nhập mặt hàng");
-            
-            // Nhập mã
-            result.Ma = NhapMa();
+            result.Ma = maMatHang;
+            result.TenHang = tenMatHang;
+            result.HanDung = hanDung;
+            result.CongTySanXuat = congTySanXuat;
+            result.NamSanXuat = namSanXuat;
+            result.LoaiHang = maLoaiHang;
 
-            // Nhập tên mặt hàng
-            result.TenHang = NhapTen();
-
-            // Nhập hạn dùng
-            Console.WriteLine("Nhập ngày hết hạn");
-            result.HanDung= NhapDate();
-
-            // Nhập công ty sản xuất
-            result.CongTySanXuat = NhapCongty();
-            
-            // Nhập năm sản xuất
-            result.NamSanXuat = NhapNamSanXuat();
-            
-            // Nhập loại hàng
-            result.LoaiHang = NhapMaLoaiHang();
-            
-            // Mặt hàng
-            return result;    
-        }
-
-        private static string NhapMaLoaiHang()
-        {
-            // ReSharper disable once InvalidXmlDocComment
-            Console.Write("Nhập mã loại hàng: ");
-            var result = Console.ReadLine();
             return result;
         }
-
-        private static int NhapNamSanXuat()
+        public static MAT_HANG ConsoleTaoMatHang()
         {
-            bool isValidInt = false;
-            int namSanXuat=0;
+            Console.WriteLine();
+            Console.WriteLine("TẠO MẶT HÀNG");
+
+            string maMatHang = NhapInputString("Nhập mã mặt hàng");
+            string tenMatHang = NhapInputString("Nhập tên mặt hàng: ");
+            DateTime hanDung = NhapNgayHetHan();
+            string congTySanXuat = NhapInputString("Nhập công ty sản xuất");
+            int namSanXuat = NhapInputInt("Nhập năm sản xuất");
+            string loaiHang = NhapInputString("Nhập mã loại hàng");
+            Console.WriteLine();
             
-            while (!isValidInt)
+            return TaoMatHang(maMatHang, tenMatHang, hanDung, congTySanXuat, namSanXuat, loaiHang);
+        }
+        
+        private static string NhapInputString(string message)
+        {
+            string result = null;
+
+            while (result == null)
+            {
+                Console.Write($"{message}: ");
+                result = Console.ReadLine();
+            }
+
+            return result;
+        }
+        
+        private static int NhapInputInt(string message)
+        {
+            int result = new int();
+            bool isValidInput = false;
+
+            while (!isValidInput)
             {
                 try
                 {
-                    Console.Write("Nhập năm sản xuất: ");
-                    namSanXuat = int.Parse(Console.ReadLine());
-                    isValidInt = true;
+                    Console.Write($"{message}: ");
+                    result = int.Parse(Console.ReadLine());
+                    isValidInput = true;
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("{0} Exception caught.", e);
+                    Console.WriteLine("Input không hợp lệ, vui lòng nhập lại");
                 }
             }
-
-            return namSanXuat;
-        }
-
-        private static string NhapCongty()
-        {
-            Console.Write("Nhập tên công ty: ");
-            string result = Console.ReadLine();
             return result;
         }
-
-        private static DateTime NhapDate()
+        
+        private static DateTime NhapNgayHetHan()
         {
             bool isValidDate = false;
             DateTime result = new DateTime();
+            
+            Console.WriteLine("Nhập Ngày Hết Hạn");
 
             while (!isValidDate)
             {
                 try
                 {
-                    Console.Write("Nhập năm: ");
-                    int nam = int.Parse(Console.ReadLine());
-
-                    Console.Write("Nhập tháng: ");
-                    int thang = int.Parse(Console.ReadLine());
-
-                    Console.Write("Nhập ngày: ");
-                    int ngay = int.Parse(Console.ReadLine());
+                    int nam = NhapInputInt("Nhập năm");
+                    int thang = NhapInputInt("Nhập tháng");
+                    int ngay = NhapInputInt("Nhập ngày");
 
                     result = new DateTime(nam, thang, ngay);
 
-                    // Set cờ
                     isValidDate = true;
-                    return result;
                 }
                 catch (Exception e)
                 {
@@ -113,29 +106,16 @@ namespace DoAnMonHoc
 
             return result;
         }
-
-        private static string NhapTen()
-        {
-            Console.Write("Nhập tên mặt hàng: ");
-            string tenHang = Console.ReadLine();
-            return tenHang;
-        }
-
-        private static string NhapMa()
-        {
-            Console.Write("Nhập mã mặt hàng: ");
-            string maMatHang = Console.ReadLine();
-            return maMatHang;
-        }
-
         public static void XuatMatHang(MAT_HANG a)
         {
+            Console.WriteLine();
             Console.WriteLine($"Mã mặt hàng {a.Ma}");
             Console.WriteLine($"Tên mặt hàng {a.TenHang}");
             Console.WriteLine($"Hạn sử dụng: {a.HanDung.ToString(CultureInfo.InvariantCulture)}");
             Console.WriteLine($"Công ty sản xuất: {a.CongTySanXuat}");
             Console.WriteLine($"Năm sản xuất: {a.NamSanXuat}");
             Console.WriteLine($"Mã loại hàng: {a.LoaiHang}");
+            Console.WriteLine();
         }
     }
 }

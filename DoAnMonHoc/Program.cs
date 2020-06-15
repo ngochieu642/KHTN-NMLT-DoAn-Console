@@ -15,7 +15,7 @@ namespace DoAnMonHoc
             while (true)
             {
                 MAT_HANG a;
-                a = XL_MatHangItem.TaoMatHang();
+                a = XL_MatHangItem.ConsoleTaoMatHang();
                 XL_MatHangItem.XuatMatHang(a);
             }
         }
