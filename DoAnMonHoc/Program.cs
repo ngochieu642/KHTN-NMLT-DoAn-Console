@@ -43,7 +43,10 @@ namespace DoAnMonHoc
                 // string newName = Console.ReadLine();
                 // XL_CuaHang.ConsoleUpdateLoaiHangTen(ref cuaHang, id, newName);
                 
-                
+                // Delete loại hàng by ID
+                Console.Write("Nhập ID cần xóa: ");
+                string id = Console.ReadLine();
+                XL_CuaHang.ConsoleDeleteLoaiHangById(ref cuaHang, id);
                 
                 XL_CuaHang.ShowAllLoaiHang(cuaHang);
             }

@@ -153,6 +153,25 @@ namespace DoAnMonHoc
 
             return isSuccess;
         }
+        
+        public static bool DeleteLoaiHangByID(ref CUA_HANG cuaHang, string id)
+        {
+            // Chỉ delete khi tôn tại loại hàng với id đó
+            // Và không có mặt hàng nào có loại hàng như thế
+            bool isSuccess = false;
+            
+            var foundItem = GetLoaiHangByID(id, cuaHang);
+            
+            // TODO: Check nếu có bất kì mặt hàng nào thuộc loại hàng với ID = id
+            
+            if (foundItem != null)
+            {
+                int index = cuaHang.TatCaLoaiHang.FindLastIndex(c => c.Ma == id);
+                cuaHang.TatCaLoaiHang.RemoveAt(index);
+            }
+
+            return isSuccess;
+        }
         public static void ConsoleUpdateLoaiHangId(ref CUA_HANG cuaHang, string oldId, string newId)
         {
             bool updateSuccess = UpdateLoaiHangId(ref cuaHang, oldId, newId);
@@ -179,25 +198,20 @@ namespace DoAnMonHoc
                 Console.WriteLine("Không thể Update vì ID không hợp lệ");
             }
         }
-        public static bool DeleteLoaiHangByID(ref CUA_HANG cuaHang, string id)
+
+        public static void ConsoleDeleteLoaiHangById(ref CUA_HANG cuaHang, string id)
         {
-            // Chỉ delete khi tôn tại loại hàng với id đó
-            // Và không có mặt hàng nào có loại hàng như thế
-            bool isSuccess = false;
-            
-            var foundItem = GetLoaiHangByID(id, cuaHang);
-            
-            // TODO: Check nếu có bất kì mặt hàng nào thuộc loại hàng với ID = id
-            
-            if (foundItem != null)
+            bool deleteSuccess = DeleteLoaiHangByID(ref cuaHang, id);
+
+            if (deleteSuccess)
             {
-                int index = cuaHang.TatCaLoaiHang.FindLastIndex(c => c.Ma == id);
-                cuaHang.TatCaLoaiHang.RemoveAt(index);
+                Console.WriteLine($"Mật hàng với ID: {id} đã được xóa khỏi cơ sở dữ liệu");
             }
-
-            return isSuccess;
+            else
+            {
+                Console.WriteLine($"Mặt hàng với ID: {id} không thể xóa khỏi cơ sở dữ liêụ");
+            }
         }
-
         public static void TimKiemLoaiHang(string options, string needToFindString)
         {
             
