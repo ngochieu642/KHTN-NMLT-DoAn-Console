@@ -24,24 +24,20 @@ namespace DoAnMonHoc
             Console.WriteLine();
             Console.WriteLine("TẠO LOẠI HÀNG");
 
-            string maLoaiHang = NhapInputString("Nhập mã loại hàng");
-            string tenLoaiHang = NhapInputString("Nhập tên loại hàng");
+            string maLoaiHang = XL_Console.NhapInputString("Nhập mã loại hàng");
+            string tenLoaiHang = XL_Console.NhapInputString("Nhập tên loại hàng");
             
             Console.WriteLine();
 
             return TaoLoaiHang(maLoaiHang, tenLoaiHang);
         }
-        private static string NhapInputString(string message)
+
+        public static void XuatLoaiHang(LOAI_HANG a)
         {
-            string result = null;
-
-            while (result == null)
-            {
-                Console.Write($"{message}: ");
-                result = Console.ReadLine();
-            }
-
-            return result;
+            Console.WriteLine();
+            Console.WriteLine($"Mã loại hàng: {a.Ma}");
+            Console.WriteLine($"Tên loại hàng:{a.TenLoaiHang}");
+            Console.WriteLine();
         }
     }
 }
