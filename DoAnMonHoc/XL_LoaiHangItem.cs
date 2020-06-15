@@ -6,6 +6,12 @@ namespace DoAnMonHoc
     {
         public string Ma;
         public string TenLoaiHang;
+
+        public LOAI_HANG(string maLoaiHang, string tenLoaiHang)
+        {
+            Ma = maLoaiHang;
+            TenLoaiHang = tenLoaiHang;
+        }
     }
     
     public class XL_LoaiHangItem

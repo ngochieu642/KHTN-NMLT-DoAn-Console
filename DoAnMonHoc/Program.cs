@@ -20,13 +20,23 @@ namespace DoAnMonHoc
             
             while (true)
             {
+                // Tạo loại hàng
                 var test = XL_LoaiHangItem.ConsoleTaoLoaiHang();
                 XL_CuaHang.ConsoleThemLoaiHang(test, ref cuaHang);
 
-                Console.Write("Nhập Id cần tìm: ");
-                string findId = Console.ReadLine();
+                // Tìm kiếm loại hàng by ID
+                // Console.Write("Nhập Id cần tìm: ");
+                // string findId = Console.ReadLine();
+                // XL_CuaHang.ConsoleGetLoaiHangById(findId, cuaHang);
                 
-                XL_CuaHang.ConsoleGetLoaiHangByID(findId, cuaHang);
+                // Update loại hàng by ID
+                // Console.Write("Nhập ID cần cập nhật: ");
+                // string oldId = Console.ReadLine();
+                // Console.Write("Nhập ID thay thế: ");
+                // string newId = Console.ReadLine();
+                // XL_CuaHang.ConsoleUpdateLoaiHangId(ref cuaHang, oldId, newId);
+                
+                XL_CuaHang.ShowAllLoaiHang(cuaHang);
             }
         }
     }

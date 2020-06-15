@@ -71,8 +71,6 @@ namespace DoAnMonHoc
                 Console.WriteLine("Loại hàng với ID này đã tồn tại");
                 Console.WriteLine("Loại hàng không được thêm vào cơ sở dữ liệu");
             }
-            
-            ShowAllLoaiHang(cuaHang);
         }
         public static void ShowAllLoaiHang(CUA_HANG cuaHang)
         {
@@ -98,7 +96,7 @@ namespace DoAnMonHoc
             }
         }
 
-        public static void ConsoleGetLoaiHangByID(string id, CUA_HANG cuaHang)
+        public static void ConsoleGetLoaiHangById(string id, CUA_HANG cuaHang)
         {
             Console.WriteLine();
             Console.WriteLine($"Tìm kiếm trong cơ sở dữ liệu loại hàng với id: {id}");
@@ -114,17 +112,53 @@ namespace DoAnMonHoc
             }
         }
 
+        public static bool UpdateLoaiHangId(ref CUA_HANG cuaHang, string oldId, string newId)
+        {
+            bool isSuccess = false;
+            
+            var foundItemOldId = GetLoaiHangByID(oldId, cuaHang);
+            var foundItemNewId = GetLoaiHangByID(newId, cuaHang);
+            
+            if (foundItemOldId != null && foundItemNewId == null)
+            {
+                // check xem mã cũ có tồn tại và mã mới ồn tại chưa
+                // Chỉ update khi mã cũ đã tồn tại và mã mới chưa tồn tại
+                int index = cuaHang.TatCaLoaiHang.FindLastIndex(c => c.Ma == oldId);
+                if(index != -1)
+                {
+                    LOAI_HANG oldLoaiHang = cuaHang.TatCaLoaiHang[index];
+                    cuaHang.TatCaLoaiHang[index] = new LOAI_HANG(newId, oldLoaiHang.TenLoaiHang);
+                }
+                
+                // TODO: Và update tất cả mặt hàng với oldId
+
+                isSuccess = true;
+
+            }
+
+            return isSuccess;
+        }
+        public static void ConsoleUpdateLoaiHangId(ref CUA_HANG cuaHang, string oldId, string newId)
+        {
+            bool updateSuccess = UpdateLoaiHangId(ref cuaHang, oldId, newId);
+            if (updateSuccess)
+            {
+                Console.WriteLine($"Cập nhật ID cho loại hàng với ID: {oldId}");
+            }
+            else
+            {
+                Console.WriteLine("Không thể Update vì ID hoặc new ID không hợp lệ");
+            }
+        }
+
+        public static void DeleteLoaiHangByID(ref CUA_HANG cuaHang, string id)
+        {
+            // Chỉ delete khi tôn tại loại hàng với id đó
+            // Và không có mặt hàng nào có loại hàng như thế
+            
+        }
+
         public static void TimKiemLoaiHang(string options, string needToFindString)
-        {
-            
-        }
-
-        public static void UpdateLoaiHang(string id)
-        {
-            
-        }
-
-        public static void DeleteLoaiHangByID(string id)
         {
             
         }
