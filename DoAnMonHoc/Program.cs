@@ -37,11 +37,13 @@ namespace DoAnMonHoc
                 // XL_CuaHang.ConsoleUpdateLoaiHangId(ref cuaHang, oldId, newId);
                 
                 // Update loại hàng tên
-                Console.Write("Nhập Id cần cập nhật: ");
-                string id = Console.ReadLine();
-                Console.Write("Nhập tên thay thế: ");
-                string newName = Console.ReadLine();
-                XL_CuaHang.ConsoleUpdateLoaiHangTen(ref cuaHang, id, newName);
+                // Console.Write("Nhập Id cần cập nhật: ");
+                // string id = Console.ReadLine();
+                // Console.Write("Nhập tên thay thế: ");
+                // string newName = Console.ReadLine();
+                // XL_CuaHang.ConsoleUpdateLoaiHangTen(ref cuaHang, id, newName);
+                
+                
                 
                 XL_CuaHang.ShowAllLoaiHang(cuaHang);
             }

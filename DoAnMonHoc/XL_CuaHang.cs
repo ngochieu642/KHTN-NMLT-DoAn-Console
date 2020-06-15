@@ -179,11 +179,23 @@ namespace DoAnMonHoc
                 Console.WriteLine("Không thể Update vì ID không hợp lệ");
             }
         }
-        public static void DeleteLoaiHangByID(ref CUA_HANG cuaHang, string id)
+        public static bool DeleteLoaiHangByID(ref CUA_HANG cuaHang, string id)
         {
             // Chỉ delete khi tôn tại loại hàng với id đó
             // Và không có mặt hàng nào có loại hàng như thế
+            bool isSuccess = false;
             
+            var foundItem = GetLoaiHangByID(id, cuaHang);
+            
+            // TODO: Check nếu có bất kì mặt hàng nào thuộc loại hàng với ID = id
+            
+            if (foundItem != null)
+            {
+                int index = cuaHang.TatCaLoaiHang.FindLastIndex(c => c.Ma == id);
+                cuaHang.TatCaLoaiHang.RemoveAt(index);
+            }
+
+            return isSuccess;
         }
 
         public static void TimKiemLoaiHang(string options, string needToFindString)
