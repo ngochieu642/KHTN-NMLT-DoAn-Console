@@ -46,7 +46,7 @@ namespace DoAnMonHoc
                 
                 // Delete loại hàng by ID
                 Console.Write("Nhập ID cần xóa: ");
-                string id = Console.ReadLine();
+                id = Console.ReadLine();
                 XL_CuaHang.ConsoleDeleteLoaiHangById(ref cuaHang, id);
                 
                 // Tìm kiếm loại hàng
