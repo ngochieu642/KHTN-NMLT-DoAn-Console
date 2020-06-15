@@ -96,10 +96,10 @@ namespace DoAnMonHoc
             bool isSuccess = false;
             
             var foundLoaiHang = GetLoaiHangById(id, cuaHang);
-            var relatedMatHang = cuaHang.TatCaMatHang.Where(st => st.LoaiHang == id).ToList().Any();
+            var hasRelatedMatHang = cuaHang.TatCaMatHang.Where(st => st.LoaiHang == id).ToList().Any();
             
-            // TODO: Check nếu có bất kì mặt hàng nào thuộc loại hàng với ID = id
-            if (foundLoaiHang != null && !relatedMatHang)
+            // Check nếu có bất kì mặt hàng nào thuộc loại hàng với ID = id
+            if (foundLoaiHang != null && !hasRelatedMatHang)
             {
                 int index = cuaHang.TatCaLoaiHang.FindLastIndex(c => c.Ma == id);
                 cuaHang.TatCaLoaiHang.RemoveAt(index);
