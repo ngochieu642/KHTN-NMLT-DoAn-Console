@@ -2,13 +2,15 @@ using System.Collections.Generic;
 
 namespace DoAnMonHoc
 {
-    public struct LIST_MAT_HANG
+    public struct CUA_HANG
     {
         public List<MAT_HANG> TatCaMatHang;
         public List<LOAI_HANG> TatCaLoaiHang;
     }
-    public class XL_MatHangList
+    public class XL_CuaHang
     {
+        public CUA_HANG CuaHang;
+        
         // Apply CRUD Mặt hàng
         public void ThemMatHang()
         {
@@ -41,7 +43,7 @@ namespace DoAnMonHoc
         }
         
         // Apply CRUD Loai hàng
-        public void ThemLoaiHang()
+        public void ThemLoaiHang(LOAI_HANG newItem)
         {
             
         }
