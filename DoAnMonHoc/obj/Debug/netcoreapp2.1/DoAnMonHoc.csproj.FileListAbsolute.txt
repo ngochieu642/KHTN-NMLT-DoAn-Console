@@ -1,0 +1,11 @@
+/media/ngochieu642/NewVolume/Work/KHTN-CNTT/Class/[2019K2]NhapMonLapTrinh/do-an/DoAnMonHoc/DoAnMonHoc/bin/Debug/netcoreapp2.1/DoAnMonHoc.deps.json
+/media/ngochieu642/NewVolume/Work/KHTN-CNTT/Class/[2019K2]NhapMonLapTrinh/do-an/DoAnMonHoc/DoAnMonHoc/bin/Debug/netcoreapp2.1/DoAnMonHoc.runtimeconfig.json
+/media/ngochieu642/NewVolume/Work/KHTN-CNTT/Class/[2019K2]NhapMonLapTrinh/do-an/DoAnMonHoc/DoAnMonHoc/bin/Debug/netcoreapp2.1/DoAnMonHoc.runtimeconfig.dev.json
+/media/ngochieu642/NewVolume/Work/KHTN-CNTT/Class/[2019K2]NhapMonLapTrinh/do-an/DoAnMonHoc/DoAnMonHoc/bin/Debug/netcoreapp2.1/DoAnMonHoc.dll
+/media/ngochieu642/NewVolume/Work/KHTN-CNTT/Class/[2019K2]NhapMonLapTrinh/do-an/DoAnMonHoc/DoAnMonHoc/bin/Debug/netcoreapp2.1/DoAnMonHoc.pdb
+/media/ngochieu642/NewVolume/Work/KHTN-CNTT/Class/[2019K2]NhapMonLapTrinh/do-an/DoAnMonHoc/DoAnMonHoc/obj/Debug/netcoreapp2.1/DoAnMonHoc.csprojAssemblyReference.cache
+/media/ngochieu642/NewVolume/Work/KHTN-CNTT/Class/[2019K2]NhapMonLapTrinh/do-an/DoAnMonHoc/DoAnMonHoc/obj/Debug/netcoreapp2.1/DoAnMonHoc.csproj.CoreCompileInputs.cache
+/media/ngochieu642/NewVolume/Work/KHTN-CNTT/Class/[2019K2]NhapMonLapTrinh/do-an/DoAnMonHoc/DoAnMonHoc/obj/Debug/netcoreapp2.1/DoAnMonHoc.AssemblyInfoInputs.cache
+/media/ngochieu642/NewVolume/Work/KHTN-CNTT/Class/[2019K2]NhapMonLapTrinh/do-an/DoAnMonHoc/DoAnMonHoc/obj/Debug/netcoreapp2.1/DoAnMonHoc.AssemblyInfo.cs
+/media/ngochieu642/NewVolume/Work/KHTN-CNTT/Class/[2019K2]NhapMonLapTrinh/do-an/DoAnMonHoc/DoAnMonHoc/obj/Debug/netcoreapp2.1/DoAnMonHoc.dll
+/media/ngochieu642/NewVolume/Work/KHTN-CNTT/Class/[2019K2]NhapMonLapTrinh/do-an/DoAnMonHoc/DoAnMonHoc/obj/Debug/netcoreapp2.1/DoAnMonHoc.pdb
