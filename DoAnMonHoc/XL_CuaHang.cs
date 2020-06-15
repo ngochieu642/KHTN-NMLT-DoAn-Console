@@ -46,11 +46,20 @@ namespace DoAnMonHoc
         public static void ThemLoaiHang(LOAI_HANG newItem, ref CUA_HANG cuaHang)
         {
             // Check nếu loại hàng với id đã tồn tại
-            // var foundItem = CuaHang.TatCaLoaiHang.Where(st => st.Ma == newItem.Ma);
-            XL_LoaiHangItem.XuatLoaiHang(newItem);
-            cuaHang.TatCaLoaiHang.Add(newItem);
-            
-            Console.WriteLine(cuaHang.TatCaLoaiHang);
+            var foundItemList = cuaHang.TatCaLoaiHang.Where(st => st.Ma == newItem.Ma).ToList();
+
+            if (!foundItemList.Any())
+            {
+                Console.WriteLine("Loại hàng với ID phù hợp");
+                Console.WriteLine("Thêm loại hàng vào Cơ sở dữ liêu...");
+                cuaHang.TatCaLoaiHang.Add(newItem);
+                Console.WriteLine("Loại hàng thêm vào cơ sở dữ liệu thành công");
+            }
+            else
+            {
+                Console.WriteLine("Loại hàng với ID này đã tồn tại");
+                Console.WriteLine("Loại hàng không được thêm vào cơ sở dữ liệu");
+            }
         }
         public static void GetAllLoaiHang()
         {
