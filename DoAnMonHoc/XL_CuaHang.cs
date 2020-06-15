@@ -283,11 +283,8 @@ namespace DoAnMonHoc
             {
                 int index = cuaHang.TatCaMatHang.FindLastIndex(c => c.Ma == oldId);
 
-                if (index != -1)
-                {
-                    MAT_HANG oldMatHang = cuaHang.TatCaMatHang[index];
-                    cuaHang.TatCaMatHang[index] = new MAT_HANG(newId, oldMatHang.TenHang, oldMatHang.HanDung, oldMatHang.CongTySanXuat, oldMatHang.NamSanXuat, oldMatHang.LoaiHang);
-                }
+                MAT_HANG oldMatHang = cuaHang.TatCaMatHang[index];
+                cuaHang.TatCaMatHang[index] = new MAT_HANG(newId, oldMatHang.TenHang, oldMatHang.HanDung, oldMatHang.CongTySanXuat, oldMatHang.NamSanXuat, oldMatHang.LoaiHang);
 
                 isSuccess = true;
             }
