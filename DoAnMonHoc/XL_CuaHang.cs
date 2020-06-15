@@ -459,5 +459,135 @@ namespace DoAnMonHoc
                 Console.WriteLine("Mặt hàng không được thêm vào cơ sở dữ liệu");
             }
         }
+
+        public static void ConsoleGetMatHangById(CUA_HANG cuaHang, string id)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"Tìm kiếm trong cơ sở dữ liệu mặt hàng với ID: {id}");
+            var foundItem = GetMatHangById(cuaHang, id);
+
+            if (foundItem != null)
+            {
+                XL_MatHang.XuatMatHang((MAT_HANG)foundItem);
+            }
+            else
+            {
+                Console.WriteLine($"Không tồn tại mặt hàng với ID: {id}");
+            }
+        }
+        
+        public static void ConsoleUpdateMatHangId(ref CUA_HANG cuaHang, string oldId, string newId)
+        {
+            bool updateSuccess = UpdateMatHangId(ref cuaHang, oldId, newId);
+            if (updateSuccess)
+            {
+                Console.WriteLine($"Cập nhật ID cho mặt hàng với ID: {oldId}");
+            }
+            else
+            {
+                Console.WriteLine("Không thể Update vì ID hoặc new ID không hợp lệ");
+            }
+        }
+        
+        public static void ConsoleUpdateMatHangTen(ref CUA_HANG cuaHang, string id, string newName)
+        {
+            bool updateSuccess = UpdateMatHangTen(ref cuaHang, id, newName);
+
+            if (updateSuccess)
+            {
+                Console.WriteLine($"Cập nhật tên cho mặt hàng với ID: {id}");
+            }
+            else
+            {
+                Console.WriteLine("Không thể Update vì ID không hợp lệ");
+            }
+        }
+        
+        public static void ConsoleUpdateMatHangHanDung(ref CUA_HANG cuaHang, string id, DateTime newHanDung)
+        {
+            bool updateSuccess = UpdateMatHangHanDung(ref cuaHang, id, newHanDung);
+
+            if (updateSuccess)
+            {
+                Console.WriteLine($"Cập nhật hạn dùng cho mặt hàng với ID: {id}");
+            }
+            else
+            {
+                Console.WriteLine("Không thể Update vì ID không hợp lệ");
+            }
+        }
+        
+        public static void ConsoleUpdateMatHangCongTySanXuat(ref CUA_HANG cuaHang, string id, string newManufacture)
+        {
+            bool updateSuccess = UpdateMatHangCongTySx(ref cuaHang, id, newManufacture);
+
+            if (updateSuccess)
+            {
+                Console.WriteLine($"Cập nhật công ty sản xuất cho mặt hàng với ID: {id}");
+            }
+            else
+            {
+                Console.WriteLine("Không thể Update vì ID không hợp lệ");
+            }
+        }
+        
+        public static void ConsoleUpdateMatHangNamSanXuatt(ref CUA_HANG cuaHang, string id, int newYear)
+        {
+            bool updateSuccess = UpdateMatHangNamSx(ref cuaHang, id, newYear);
+
+            if (updateSuccess)
+            {
+                Console.WriteLine($"Cập nhật năm sản xuất cho mặt hàng với ID: {id}");
+            }
+            else
+            {
+                Console.WriteLine("Không thể Update vì ID không hợp lệ");
+            }
+        }
+        
+        public static void ConsoleUpdateMatHangLoaiHang(ref CUA_HANG cuaHang, string id, string newLoaiHang)
+        {
+            bool updateSuccess = UpdateMatHangLoaiHang(ref cuaHang, id, newLoaiHang);
+
+            if (updateSuccess)
+            {
+                Console.WriteLine($"Cập nhật loaị hàng cho mặt hàng với ID: {id}");
+            }
+            else
+            {
+                Console.WriteLine("Không thể Update vì ID không hợp lệ");
+            }
+        }
+
+        public static void ConsoleDeleteMatHangById(ref CUA_HANG cuaHang, string id)
+        {
+            bool deleteSuccess = DeleteMatHangById(ref cuaHang, id);
+
+            if (deleteSuccess)
+            {
+                Console.WriteLine($"Mặt hàng với ID: {id} đã được xóa khỏi cơ sở dữ liệu");
+            }
+            else
+            {
+                Console.WriteLine($"Mặt hàng với ID: {id} không thể xóa khỏi cơ sở dữ liệu");
+            }
+        }
+        
+        public static void ConsoleTimKiemMatHang(CUA_HANG cuaHang, string options, string toFindObject)
+        {
+            List<MAT_HANG> foundItems = TimKiemMatHang(cuaHang, options, toFindObject);
+
+            if (foundItems.Any())
+            {
+                Console.WriteLine();
+                Console.WriteLine("Kết quả tìm kiếm: ");
+                XL_MatHang.XuatMatHangList(foundItems);
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine("Không có loại hàng thỏa điều kiện tìm kiếm");
+            }
+        }
     }
 }
