@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
@@ -28,6 +29,7 @@ namespace DoAnMonHoc
 
             return result;
         }
+        
         public static MAT_HANG ConsoleTaoMatHang()
         {
             Console.WriteLine();
@@ -54,6 +56,14 @@ namespace DoAnMonHoc
             Console.WriteLine($"Năm sản xuất: {a.NamSanXuat}");
             Console.WriteLine($"Mã loại hàng: {a.LoaiHang}");
             Console.WriteLine();
+        }
+
+        public static void XuatMatHangList(List<MAT_HANG> a)
+        {
+            foreach (var matHang in a)
+            {
+                XL_MatHang.XuatMatHang(matHang);
+            }
         }
     }
 }

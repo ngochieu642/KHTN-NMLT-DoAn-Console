@@ -20,10 +20,9 @@ namespace DoAnMonHoc
             
             while (true)
             {
+                // -------------XỦ LÝ LOẠI HÀNG-------------------
                 // Tạo loại hàng
                 var test = XL_LoaiHang.ConsoleTaoLoaiHang();
-                
-                // Tạo loại hàng
                 XL_CuaHang.ConsoleThemLoaiHang(test, ref cuaHang);
 
                 // Tìm kiếm loại hàng by ID
@@ -56,6 +55,9 @@ namespace DoAnMonHoc
                 // XL_CuaHang.ConsoleTimKiemLoaiHang(cuaHang, "regex", toFind);
                 
                 XL_CuaHang.ShowAllLoaiHang(cuaHang);
+                
+                // --------------XỬ LÝ MẶT HÀNG-----------------
+                
             }
         }
     }
