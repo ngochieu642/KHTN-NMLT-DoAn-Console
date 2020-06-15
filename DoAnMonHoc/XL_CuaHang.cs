@@ -212,9 +212,29 @@ namespace DoAnMonHoc
                 Console.WriteLine($"Mặt hàng với ID: {id} không thể xóa khỏi cơ sở dữ liêụ");
             }
         }
-        public static void TimKiemLoaiHang(string options, string needToFindString)
+        public static List <LOAI_HANG> TimKiemLoaiHang(CUA_HANG cuaHang, string options, string toFindObject)
         {
+            List<LOAI_HANG> result = new List<LOAI_HANG>();
             
+            if (options == "id")
+            {
+                LOAI_HANG? foundItem = GetLoaiHangByID(toFindObject, cuaHang);
+
+                if (foundItem != null)
+                {
+                    result.Add((LOAI_HANG) foundItem);   
+                }
+            }
+            else if (options == "regex")
+            {
+                var foundItemList = cuaHang.TatCaLoaiHang.Where(st => st.TenLoaiHang.Contains(toFindObject, StringComparison.CurrentCultureIgnoreCase)).ToList();
+                foreach (var item in foundItemList)
+                {
+                    result.Add(item);
+                }
+            }
+
+            return result;
         }
     }
 }
