@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DoAnMonHoc
 {
@@ -9,65 +11,68 @@ namespace DoAnMonHoc
     }
     public class XL_CuaHang
     {
-        public CUA_HANG CuaHang;
-        
         // Apply CRUD Mặt hàng
-        public void ThemMatHang()
+        public static void ThemMatHang(MAT_HANG newItem)
         {
             
         }
 
-        public void GetAllMatHang()
+        public static void GetAllMatHang()
         {
             
         }
 
-        public void GetMatHangByID(string id)
+        public static void GetMatHangByID(string id)
         {
             
         }
 
-        public void TimKiemMatHang(string options, string needToFindString)
+        public static void TimKiemMatHang(string options, string needToFindString)
         {
             
         }
 
-        public void UpdateMatHang(string id)
+        public static void UpdateMatHang(string id)
         {
             
         }
 
-        public void DeleteMatHangByID(string id)
+        public static void DeleteMatHangByID(string id)
         {
             
         }
         
         // Apply CRUD Loai hàng
-        public void ThemLoaiHang(LOAI_HANG newItem)
+        public static void ThemLoaiHang(LOAI_HANG newItem, ref CUA_HANG cuaHang)
         {
+            // Check nếu loại hàng với id đã tồn tại
+            // var foundItem = CuaHang.TatCaLoaiHang.Where(st => st.Ma == newItem.Ma);
+            XL_LoaiHangItem.XuatLoaiHang(newItem);
+            cuaHang.TatCaLoaiHang.Add(newItem);
             
+            Console.WriteLine(cuaHang.TatCaLoaiHang);
         }
-        public void GetAllLoaiHang()
-        {
-            
-        }
-
-        public void GetLoaiHangByID(string id)
-        {
-            
-        }
-
-        public void TimKiemLoaiHang(string options, string needToFindString)
+        public static void GetAllLoaiHang()
         {
             
         }
 
-        public void UpdateLoaiHang(string id)
+        public static void GetLoaiHangByID(string id)
         {
             
         }
 
-        public void DeleteLoaiHangByID(string id)
+        public static void TimKiemLoaiHang(string options, string needToFindString)
+        {
+            
+        }
+
+        public static void UpdateLoaiHang(string id)
+        {
+            
+        }
+
+        public static void DeleteLoaiHangByID(string id)
         {
             
         }
