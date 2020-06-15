@@ -11,37 +11,6 @@ namespace DoAnMonHoc
     }
     public class XL_CuaHang
     {
-        // Apply CRUD Mặt hàng
-        public static void ThemMatHang(MAT_HANG newItem)
-        {
-            
-        }
-
-        public static void GetAllMatHang()
-        {
-            
-        }
-
-        public static void GetMatHangByID(string id)
-        {
-            
-        }
-
-        public static void TimKiemMatHang(string options, string needToFindString)
-        {
-            
-        }
-
-        public static void UpdateMatHang(string id)
-        {
-            
-        }
-
-        public static void DeleteMatHangByID(string id)
-        {
-            
-        }
-        
         // Apply CRUD Loai hàng
         
         // Hàm xử lý logic
@@ -87,7 +56,12 @@ namespace DoAnMonHoc
                     LOAI_HANG oldLoaiHang = cuaHang.TatCaLoaiHang[index];
                     cuaHang.TatCaLoaiHang[index] = new LOAI_HANG(newId, oldLoaiHang.TenLoaiHang);
                     
-                    // TODO: Và update tất cả mặt hàng với oldId
+                    // Và update tất cả mặt hàng với oldId
+                    foreach (var matHang in cuaHang.TatCaMatHang)
+                    {
+                        UpdateMatHangLoaiHang(ref cuaHang, matHang.Ma, newId);
+                    }
+                    
                     isSuccess = true;
                 }
             }
@@ -121,11 +95,11 @@ namespace DoAnMonHoc
             // Và không có mặt hàng nào có loại hàng như thế
             bool isSuccess = false;
             
-            var foundItem = GetLoaiHangById(id, cuaHang);
+            var foundLoaiHang = GetLoaiHangById(id, cuaHang);
+            var relatedMatHang = cuaHang.TatCaMatHang.Where(st => st.LoaiHang == id).ToList().Any();
             
             // TODO: Check nếu có bất kì mặt hàng nào thuộc loại hàng với ID = id
-            
-            if (foundItem != null)
+            if (foundLoaiHang != null && !relatedMatHang)
             {
                 int index = cuaHang.TatCaLoaiHang.FindLastIndex(c => c.Ma == id);
                 cuaHang.TatCaLoaiHang.RemoveAt(index);
@@ -238,11 +212,11 @@ namespace DoAnMonHoc
 
             if (deleteSuccess)
             {
-                Console.WriteLine($"Mật hàng với ID: {id} đã được xóa khỏi cơ sở dữ liệu");
+                Console.WriteLine($"Loại hàng với ID: {id} đã được xóa khỏi cơ sở dữ liệu");
             }
             else
             {
-                Console.WriteLine($"Mặt hàng với ID: {id} không thể xóa khỏi cơ sở dữ liêụ");
+                Console.WriteLine($"Loại hàng với ID: {id} không thể xóa khỏi cơ sở dữ liêụ");
             }
         }
 
@@ -468,6 +442,22 @@ namespace DoAnMonHoc
             }
 
             return result;
+        }
+
+        public static void ConsoleThemMatHang(ref CUA_HANG cuaHang, MAT_HANG newItem)
+        {
+            bool isSuccess = ThemMatHang(ref cuaHang, newItem);
+
+            if (isSuccess)
+            {
+                Console.WriteLine("Mặt hàng với ID phù hợp");
+                Console.WriteLine("Mặt hàng thêm vào cơ sở dữ liệu thành công");
+            }
+            else
+            {
+                Console.WriteLine("Không thể thêm mặt hàng do ID / loại hàng không hợp lệ");
+                Console.WriteLine("Mặt hàng không được thêm vào cơ sở dữ liệu");
+            }
         }
     }
 }

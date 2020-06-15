@@ -45,9 +45,9 @@ namespace DoAnMonHoc
                 // XL_CuaHang.ConsoleUpdateLoaiHangTen(ref cuaHang, id, newName);
                 
                 // Delete loại hàng by ID
-                // Console.Write("Nhập ID cần xóa: ");
-                // string id = Console.ReadLine();
-                // XL_CuaHang.ConsoleDeleteLoaiHangById(ref cuaHang, id);
+                Console.Write("Nhập ID cần xóa: ");
+                string id = Console.ReadLine();
+                XL_CuaHang.ConsoleDeleteLoaiHangById(ref cuaHang, id);
                 
                 // Tìm kiếm loại hàng
                 // Console.Write("Nhập tên cần tìm: ");
@@ -57,6 +57,11 @@ namespace DoAnMonHoc
                 XL_CuaHang.ShowAllLoaiHang(cuaHang);
                 
                 // --------------XỬ LÝ MẶT HÀNG-----------------
+                
+                // Tạo mặt hàng
+                var testMatHang = XL_MatHang.ConsoleTaoMatHang();
+                XL_CuaHang.ConsoleThemMatHang(ref cuaHang, testMatHang);
+                
                 
             }
         }
