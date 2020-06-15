@@ -43,16 +43,27 @@ namespace DoAnMonHoc
         }
         
         // Apply CRUD Loai hàng
-        public static void ThemLoaiHang(LOAI_HANG newItem, ref CUA_HANG cuaHang)
+        public static bool ThemLoaiHang(LOAI_HANG newItem, ref CUA_HANG cuaHang)
         {
-            // Check nếu loại hàng với id đã tồn tại
             var foundItemList = cuaHang.TatCaLoaiHang.Where(st => st.Ma == newItem.Ma).ToList();
-
             if (!foundItemList.Any())
             {
-                Console.WriteLine("Loại hàng với ID phù hợp");
-                Console.WriteLine("Thêm loại hàng vào Cơ sở dữ liêu...");
                 cuaHang.TatCaLoaiHang.Add(newItem);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public static void ConsoleThemLoaiHang(LOAI_HANG newItem, ref CUA_HANG cuaHang)
+        {
+            // Check nếu loại hàng với id đã tồn tại
+            bool themThanhCong = ThemLoaiHang(newItem, ref cuaHang);
+
+            if (themThanhCong)
+            {
+                Console.WriteLine("Loại hàng với ID phù hợp");
                 Console.WriteLine("Loại hàng thêm vào cơ sở dữ liệu thành công");
             }
             else

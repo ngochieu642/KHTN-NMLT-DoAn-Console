@@ -22,8 +22,7 @@ namespace DoAnMonHoc
             {
                 var test = XL_LoaiHangItem.ConsoleTaoLoaiHang();
                 
-
-                XL_CuaHang.ThemLoaiHang(test, ref cuaHang);
+                XL_CuaHang.ConsoleThemLoaiHang(test, ref cuaHang);
             }
         }
     }
