@@ -21,8 +21,12 @@ namespace DoAnMonHoc
             while (true)
             {
                 var test = XL_LoaiHangItem.ConsoleTaoLoaiHang();
-                
                 XL_CuaHang.ConsoleThemLoaiHang(test, ref cuaHang);
+
+                Console.Write("Nhập Id cần tìm: ");
+                string findId = Console.ReadLine();
+                
+                XL_CuaHang.ConsoleGetLoaiHangByID(findId, cuaHang);
             }
         }
     }

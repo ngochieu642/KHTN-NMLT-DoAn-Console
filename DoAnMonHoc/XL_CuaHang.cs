@@ -85,9 +85,33 @@ namespace DoAnMonHoc
             }
         }
 
-        public static void GetLoaiHangByID(string id)
+        public static LOAI_HANG? GetLoaiHangByID(string id, CUA_HANG cuaHang)
         {
-            
+            var foundItemList = cuaHang.TatCaLoaiHang.Where(st => st.Ma == id).ToList();
+            if (!foundItemList.Any())
+            {
+                return null;
+            }
+            else
+            {
+                return foundItemList[0];
+            }
+        }
+
+        public static void ConsoleGetLoaiHangByID(string id, CUA_HANG cuaHang)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"Tìm kiếm trong cơ sở dữ liệu loại hàng với id: {id}");
+            var foundItem = GetLoaiHangByID(id, cuaHang);
+
+            if (foundItem != null)
+            {
+                XL_LoaiHangItem.XuatLoaiHang((LOAI_HANG)foundItem);
+            }
+            else
+            {
+                Console.WriteLine($"Không tồn tại loại hàng với id: {id}");
+            }
         }
 
         public static void TimKiemLoaiHang(string options, string needToFindString)
