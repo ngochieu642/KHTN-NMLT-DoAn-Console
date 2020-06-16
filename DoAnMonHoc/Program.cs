@@ -80,36 +80,8 @@ namespace DoAnMonHoc
                     
                 // Lua chon loai Menu
                 int menuOption = new int();
-                bool isValidMenuOption = false;
-                string invalidInputMsg = "Không hợp lệ, vui lòng nhập lại";
-
-                while (!isValidMenuOption)
-                {
-                    try
-                    {
-                        Console.WriteLine();
-                        Console.Write("Vui lòng chọn loại menu: ");
-                        menuOption = int.Parse(Console.ReadLine());
-
-                        if (menuOption == 1 || menuOption ==2)
-                        {
-                            isValidMenuOption = true;
-                        } else if (menuOption == 0)
-                        {
-                            // Exit
-                            isValidMenuOption = true;
-                            wantToExit = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine(invalidInputMsg);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(invalidInputMsg);
-                    }   
-                }
+                menuOption = ChonMenuGeneral();
+                wantToExit = menuOption == 0;
 
                 if (wantToExit)
                 {
@@ -142,8 +114,16 @@ namespace DoAnMonHoc
 
             while (true)
             {
-                
+                Console.WriteLine();
+                menuOption = XL_Console.NhapInputInt("Vui lòng chọn loại menu");
+
+                if (menuOption == 1 || menuOption == 2 || menuOption == 0)
+                {
+                    break;
+                }
             }
+
+            return menuOption;
         }
         
         private static int ChonMenuLoaiHang()
