@@ -227,7 +227,7 @@ namespace DoAnMonHoc
 
             if (foundItems.Any())
             {
-                Console.WriteLine();
+                Console.WriteLine("----------");
                 Console.WriteLine("Kết quả tìm kiếm: ");
                 XL_LoaiHang.XuatLoaiHangList(foundItems);
             }
@@ -588,7 +588,7 @@ namespace DoAnMonHoc
 
             if (foundItems.Any())
             {
-                Console.WriteLine();
+                Console.WriteLine("----------");
                 Console.WriteLine("Kết quả tìm kiếm: ");
                 XL_MatHang.XuatMatHangList(foundItems);
             }
