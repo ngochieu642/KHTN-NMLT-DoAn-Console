@@ -146,7 +146,7 @@ namespace DoAnMonHoc
             }
         }
 
-        public static void ConsoleThemLoaiHang(LOAI_HANG newItem, ref CUA_HANG cuaHang)
+        public static void ConsoleThemLoaiHang(ref CUA_HANG cuaHang, LOAI_HANG newItem)
         {
             // Check nếu loại hàng với id đã tồn tại
             bool themThanhCong = ThemLoaiHang(newItem, ref cuaHang);
