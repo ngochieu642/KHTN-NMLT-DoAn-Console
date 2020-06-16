@@ -17,7 +17,7 @@ namespace DoAnMonHoc
     
     public class XL_LoaiHang
     {
-        public static LOAI_HANG TaoLoaiHang(string ma, string tenLoaiHang)
+        private static LOAI_HANG TaoLoaiHang(string ma, string tenLoaiHang)
         {
             LOAI_HANG result = new LOAI_HANG();
             result.Ma = ma;
@@ -50,7 +50,7 @@ namespace DoAnMonHoc
         {
             foreach (var loaiHang in a)
             {
-                XL_LoaiHang.XuatLoaiHang(loaiHang);
+                XuatLoaiHang(loaiHang);
             }
         }
     }

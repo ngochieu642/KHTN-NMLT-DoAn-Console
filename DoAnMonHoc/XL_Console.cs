@@ -43,6 +43,7 @@ namespace DoAnMonHoc
             bool isValidDate = false;
             DateTime result = new DateTime();
             
+            Console.WriteLine();
             Console.WriteLine("Nhập Ngày Hết Hạn");
 
             while (!isValidDate)

@@ -14,7 +14,7 @@ namespace DoAnMonHoc
         // Apply CRUD Loai hàng
         
         // Hàm xử lý logic
-        public static bool ThemLoaiHang(LOAI_HANG newItem, ref CUA_HANG cuaHang)
+        private static bool ThemLoaiHang(LOAI_HANG newItem, ref CUA_HANG cuaHang)
         {
             bool isSuccess = false;
             var foundItemList = cuaHang.TatCaLoaiHang.Where(st => st.Ma == newItem.Ma).ToList();
@@ -26,7 +26,8 @@ namespace DoAnMonHoc
 
             return isSuccess;
         }
-        public static LOAI_HANG? GetLoaiHangById(string id, CUA_HANG cuaHang)
+
+        private static LOAI_HANG? GetLoaiHangById(string id, CUA_HANG cuaHang)
         {
             var foundItemList = cuaHang.TatCaLoaiHang.Where(st => st.Ma == id).ToList();
             if (!foundItemList.Any())
@@ -39,7 +40,7 @@ namespace DoAnMonHoc
             }
         }
 
-        public static bool UpdateLoaiHangId(ref CUA_HANG cuaHang, string oldId, string newId)
+        private static bool UpdateLoaiHangId(ref CUA_HANG cuaHang, string oldId, string newId)
         {
             bool isSuccess = false;
             
@@ -69,7 +70,7 @@ namespace DoAnMonHoc
             return isSuccess;
         }
 
-        public static bool UpdateLoaiHangTen(ref CUA_HANG cuaHang, string id, string newName)
+        private static bool UpdateLoaiHangTen(ref CUA_HANG cuaHang, string id, string newName)
         {
             bool isSuccess = false;
 
@@ -88,8 +89,8 @@ namespace DoAnMonHoc
 
             return isSuccess;
         }
-        
-        public static bool DeleteLoaiHangById(ref CUA_HANG cuaHang, string id)
+
+        private static bool DeleteLoaiHangById(ref CUA_HANG cuaHang, string id)
         {
             // Chỉ delete khi tôn tại loại hàng với id đó
             // Và không có mặt hàng nào có loại hàng như thế
@@ -441,6 +442,17 @@ namespace DoAnMonHoc
             return result;
         }
 
+        // Hàm log console
+        public static void ShowAllMatHang(CUA_HANG cuaHang)
+        {
+            Console.WriteLine();
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("Các mặt hàng tồn tại trong cửa hàng");
+            foreach (var item in cuaHang.TatCaMatHang)
+            {
+                XL_MatHang.XuatMatHang(item);
+            }
+        }
         public static void ConsoleThemMatHang(ref CUA_HANG cuaHang, MAT_HANG newItem)
         {
             bool isSuccess = ThemMatHang(ref cuaHang, newItem);
