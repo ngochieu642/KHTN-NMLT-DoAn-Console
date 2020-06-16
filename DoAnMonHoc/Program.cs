@@ -121,7 +121,7 @@ namespace DoAnMonHoc
                 {
                     case 1:
                         Console.WriteLine("Bạn đã lựa chọn menu mặt hàng");
-                        ShowMenuMatHang();
+                        ChonMenuMatHang();
                         break;
                     case 2:
                         Console.WriteLine("Bạn đã lựa chọn menu loại hàng");
@@ -136,6 +136,16 @@ namespace DoAnMonHoc
             Console.WriteLine("GoodBye and have a nice day!");
         }
 
+        private static int ChonMenuGeneral()
+        {
+            int menuOption = new int();
+
+            while (true)
+            {
+                
+            }
+        }
+        
         private static int ChonMenuLoaiHang()
         {
             int menuOption  = new int();
@@ -162,7 +172,7 @@ namespace DoAnMonHoc
             return menuOption;
         }
 
-        private static void ShowMenuMatHang()
+        private static void ChonMenuMatHang()
         {
             Console.WriteLine();
             Console.WriteLine("-----MENU MẶT HÀNG-----");
